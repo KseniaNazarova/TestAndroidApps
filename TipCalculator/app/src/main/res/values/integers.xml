@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="max_bill_length">6</integer>
+    <integer name="max_tip_pecentage">30</integer>
+    <integer name="def_tip_percentage">15</integer>
+</resources>
