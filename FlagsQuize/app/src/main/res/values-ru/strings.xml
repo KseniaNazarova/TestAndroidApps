@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings">Настройки</string>
+    <string name="default_region_message">Должен быть выбран хотя бы один регион. По умолчанию - Северная Америка.</string>
+    <string name="guess_country">Выбери страну</string>
+    <string name="image_decription">Изображение текущего флага в викторине</string>
+    <string name="incorrect_answer">Неверно!</string>
+    <string name="number_of_choices">Количество вариантов</string>
+    <string name="number_of_choices_description">Отобразить 2, 4, 6 или 8 вариантов</string>
+    <string name="question">Вопрос %1$d из %2$d</string>
+    <string name="reset_quiz">Сбросить прогресс</string>
+    <string name="restarting_quiz">Викторина перезапустится с новыми настройками</string>
+    <string name="results">%1$d вопросов, %2$.02f%% верно</string>
+    <string name="world_regions">Регионы</string>
+    <string name="world_regions_description">Регионы, которые требуется включить в викторину</string>
+</resources>
