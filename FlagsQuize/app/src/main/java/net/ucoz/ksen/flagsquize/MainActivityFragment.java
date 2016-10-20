@@ -4,16 +4,15 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,9 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -73,9 +70,9 @@ public class MainActivityFragment extends Fragment {
         handler = new Handler();
 
         // загрузка анимации для неправильных ответов
-        // повторяется 2 раза
+        // повторяется 3 раза
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.incorrect_shake);
-        shakeAnimation.setRepeatCount(2);
+        shakeAnimation.setRepeatCount(3);
 
         // ссылки на компоненты gui
         quizLinearLayout = (LinearLayout) view.findViewById(R.id.quizLinearLayout);
@@ -236,6 +233,7 @@ public class MainActivityFragment extends Fragment {
         animator.start();
     }
 
+
     private View.OnClickListener guessButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -243,10 +241,10 @@ public class MainActivityFragment extends Fragment {
             String guess = ((Button) v).getText().toString();
             String answer = getCountryName(correctAnswer);
 
-            totalGuesses++;
+            ++totalGuesses;
 
             if (guess.equals(answer)){
-                correctAnswers++;
+                ++correctAnswers;
 
                 answerTextView.setText(answer + "!");
                 answerTextView.setTextColor(getResources().getColor(R.color.correct_answer, getContext().getTheme()));
@@ -293,12 +291,11 @@ public class MainActivityFragment extends Fragment {
         }
     };
 
-    private void disableButtons(){
-        for(LinearLayout row : guessLinearLayouts){
-            for (int i = 0; i < row.getChildCount(); i++) {
-                row.getChildAt(i).setEnabled(false);
-            }
+    private void disableButtons() {
+        for (int row = 0; row < guessRows; row++) {
+            LinearLayout guessRow = guessLinearLayouts[row];
+            for (int i = 0; i < guessRow.getChildCount(); i++)
+                guessRow.getChildAt(i).setEnabled(false);
         }
     }
 }
-

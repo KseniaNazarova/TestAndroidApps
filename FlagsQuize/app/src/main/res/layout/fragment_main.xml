@@ -9,13 +9,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="net.ucoz.ksen.flagsquize.MainActivityFragment"
+    tools:context=".MainActivityFragment"
     tools:showIn="@layout/activity_main"
     android:orientation="vertical">
 
     <TextView
         android:text="@string/question"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/questionNumberTextView"
         android:gravity="center_horizontal"
@@ -25,18 +25,18 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/flagImageView"
-        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_gravity="center"
         android:layout_marginBottom="@dimen/spacing"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:adjustViewBounds="true"
         android:contentDescription="@string/image_decription"
-        android:scaleType="centerInside" />
+        android:scaleType="fitCenter" />
 
     <TextView
         android:text="@string/guess_country"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guessCountryTextView"
         android:layout_gravity="center_horizontal"
@@ -143,11 +143,11 @@
     </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/answerTextView"
         android:gravity="bottom|center_horizontal"
         android:layout_gravity="center_horizontal"
         android:textSize="@dimen/answer_size"
-        android:textStyle="normal|bold" />
+        android:textStyle="bold" />
 </LinearLayout>
