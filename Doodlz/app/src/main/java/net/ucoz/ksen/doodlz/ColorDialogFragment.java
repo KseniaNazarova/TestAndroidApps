@@ -11,10 +11,6 @@ import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.SeekBar;
 
-/**
- * Created by Kseniya on 21.10.2016.
- */
-
 public class ColorDialogFragment extends DialogFragment {
     private SeekBar alphaSeekBar;
     private SeekBar redSeekBar;
@@ -83,9 +79,11 @@ public class ColorDialogFragment extends DialogFragment {
     private final SeekBar.OnSeekBarChangeListener colorChangedListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            if (fromUser) { // изменено пользователем
-                color = Color.argb(alphaSeekBar.getProgress(), redSeekBar.getProgress(), greenSeekBar.getProgress(), blueSeekBar.getProgress());
-            }
+            if (fromUser) // изменено пользователем
+                color = Color.argb(alphaSeekBar.getProgress(),
+                        redSeekBar.getProgress(),
+                        greenSeekBar.getProgress(),
+                        blueSeekBar.getProgress());
             colorView.setBackgroundColor(color);
         }
 
