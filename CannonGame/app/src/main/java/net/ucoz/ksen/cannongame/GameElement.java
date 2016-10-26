@@ -25,7 +25,7 @@ public class GameElement {
         // Смещение по вертикали
         shape.offset(0, (int)(velocityY * interval));
 
-        if (shape.top < 0 && velocityY <0 || shape.bottom > view.getScreenHigh() && velocityY > 0)
+        if (shape.top < 0 && velocityY <0 || shape.bottom > view.getScreenHeigh() && velocityY > 0)
             velocityY *= -1;
     }
 
