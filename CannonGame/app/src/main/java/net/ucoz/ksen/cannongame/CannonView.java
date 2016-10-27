@@ -14,6 +14,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class CannonView extends SurfaceView {
 
@@ -98,4 +99,62 @@ public class CannonView extends SurfaceView {
         backgroundPaint = new Paint();
         backgroundPaint.setColor(Color.WHITE);
     }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+
+        screenHeight = h;
+        screenWidth = w;
+
+        textPaint.setTextSize((float) (TEXT_SIZE_PERCERNT * screenHeight));
+        textPaint.setAntiAlias(true);
+    }
+
+    public void playSound(int soundId){
+        soundPool.play(soundMap.get(soundId), 1, 1, 1, 0, 1f);
+    }
+
+    public int getScreenHeight(){
+        return screenHeight;
+    }
+
+    public int getScreenWidth(){
+        return screenWidth;
+    }
+
+    public void newGame(){
+        cannon = new Cannon(this, (int)(CANNON_BASE_RADIUS_PERCENT * screenHeight),
+                (int)(CANNON_BARREL_LENGTH_PERCENT * screenWidth),
+                (int)(CANNON_BARREL_WIDTH_PERCENT * screenHeight));
+
+        Random random = new Random();
+        targets = new ArrayList<>();
+
+        int targetX = (int)(TARGET_FIRST_X_PERCENT * screenWidth);
+        int targetY = (int)((0.5 - TARGET_LENGTH_PERCENT / 2) * screenHeight);
+
+        for (int i = 0; i < TARGET_PIECES; i++) {
+            double velocity = screenHeight * (random.nextDouble() * (TARGET_MAX_SPEED_PERCENT - TARGET_MIN_SPEED_PERCENT) + TARGET_MIN_SPEED_PERCENT);
+            int color = (i % 2 == 0) ? getResources().getColor(R.color.dark, getContext().getTheme()) : getResources().getColor(R.color.light, getContext().getTheme());
+            velocity *= -1;
+
+            targets.add(new Target(this, color, HIT_REWARD, targetX, targetY, (int)(TARGET_WIDTH_PERCENT * screenWidth), (int)(TARGET_LENGTH_PERCENT * screenHeight), (int)velocity));
+            targetX += (TARGET_WIDTH_PERCENT + TARGET_SPACING_PERCENT) * screenWidth;
+        }
+
+        blocker = new Blocker(this, Color.BLACK, MISS_PENALTY, (int)(BLOCKER_X_PERCENT * screenWidth), (int)((0.5 - BLOCKER_LENGTH_PERCENT / 2) * screenHeight), (int)(BLOCKER_WIDTH_PERCENT * screenWidth), (int)(BLOCKER_LENGTH_PERCENT * screenHeight), (float)(BLOCKER_SPEED_PERCENT * screenHeight));
+        timeLeft = 10;
+        shotsFired = 0;
+        totalElapsedTime = 0.0;
+
+        if (gameOver){
+            gameOver = false;
+            cannonThread = new CannonThread(getHolder());
+            cannonThread.start();
+        }
+
+        hideSystemBars();
+    }
+
 }
