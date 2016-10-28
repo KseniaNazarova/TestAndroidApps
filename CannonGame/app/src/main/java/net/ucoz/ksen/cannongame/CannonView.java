@@ -241,7 +241,41 @@ public class CannonView extends SurfaceView {
     }
 
     public void drawGameElements(Canvas canvas){
+        canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), backgroundPaint);
+        canvas.drawText(getResources().getString(R.string.time_remaining_format, timeLeft), 50, 100, textPaint);
+        cannon.draw(canvas);
 
+        if (cannon.getCannonBall() != null && cannon.getCannonBall().isOnScreen())
+            cannon.getCannonBall().draw(canvas);
+
+        blocker.draw(canvas);
+
+        for (GameElement target : targets)
+            target.draw(canvas);
     }
 
+    public void testForCollisions(){
+        if (cannon.getCannonBall() != null && cannon.getCannonBall().isOnScreen()){
+            for (int i = 0; i < targets.size(); i++) {
+                if (cannon.getCannonBall().collidesWith(targets.get(i))){
+                    targets.get(i).playSound();
+
+                    timeLeft += targets.get(i).getHitReward();
+                    cannon.removeCannonBall();
+                    targets.remove(i);
+                    --i;
+                    break;
+                }
+
+            }
+        }
+        else
+            cannon.removeCannonBall();
+
+        if (cannon.getCannonBall() != null && cannon.getCannonBall().collidesWith(blocker)){
+            blocker.playSound();
+            cannon.getCannonBall().reverseVelocityX();
+            timeLeft -= blocker.getMissPenalty();
+        }
+    }
 }
