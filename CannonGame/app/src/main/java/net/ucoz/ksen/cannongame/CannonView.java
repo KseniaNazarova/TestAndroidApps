@@ -278,4 +278,18 @@ public class CannonView extends SurfaceView {
             timeLeft -= blocker.getMissPenalty();
         }
     }
+
+    public void stopGame(){
+        if (cannonThread != null)
+            cannonThread.setRunning(false);
+    }
+
+    public void releaseResources(){
+        soundPool.release();
+        soundPool = null;
+    }
+
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height){}
+
+
 }
