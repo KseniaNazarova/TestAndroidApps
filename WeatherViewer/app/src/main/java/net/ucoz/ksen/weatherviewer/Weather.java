@@ -30,7 +30,7 @@ public class Weather {
         calendar.setTimeInMillis(timeStamp * 1000);
         TimeZone timeZone = TimeZone.getDefault();
         calendar.add(Calendar.MILLISECOND, timeZone.getOffset(calendar.getTimeInMillis()));
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MMM d");
         return dateFormat.format(calendar.getTime());
     }
 }
