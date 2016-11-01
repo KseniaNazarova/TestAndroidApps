@@ -16,10 +16,13 @@ public class MainActivity extends AppCompatActivity {
 
     private double billAmount = 0.0;
     private double percent = 0.15;
+    private int divider = 1;
     private TextView amountTextView;
     private TextView percentTextView;
     private TextView tipTextView;
     private TextView totalTextView;
+    private TextView splitTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         percentTextView = (TextView) findViewById(R.id.percentTextView);
         tipTextView = (TextView) findViewById(R.id.tipTextView);
         totalTextView = (TextView) findViewById(R.id.totalTextView);
+        splitTextView = (TextView) findViewById(R.id.splitTextView);
 
         EditText amountEditText = (EditText) findViewById(R.id.amountEditText);
         amountEditText.addTextChangedListener(new TextWatcher() {
@@ -68,16 +72,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
+
+        SeekBar splitSeekBar = (SeekBar) findViewById(R.id.splitSeekBar);
+        splitSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {}
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
     }
 
     private void calculate(){
         percentTextView.setText(percentFormat.format(percent));
+
 
         double tip = billAmount * percent;
         double total = billAmount + tip;
 
         tipTextView.setText(currencyFormat.format(tip));
         totalTextView.setText(currencyFormat.format(total));
+        //splitTextView.setText();
 
     }
 }

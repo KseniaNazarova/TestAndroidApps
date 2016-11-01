@@ -54,6 +54,24 @@
         android:layout_gravity="fill_horizontal" />
 
     <TextView
+        android:text="@string/split_def"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/seekbar_height"
+        android:id="@+id/splitTextView"
+        android:layout_column="0"
+        android:gravity="right|center_vertical"
+        android:layout_gravity="right|fill_horizontal" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/seekbar_height"
+        android:id="@+id/splitSeekBar"
+        android:max="@integer/max_split_value"
+        android:progress="@integer/def_split_value"
+        android:layout_column="1"
+        android:layout_gravity="fill_horizontal" />
+
+    <TextView
         android:text="@string/tip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
