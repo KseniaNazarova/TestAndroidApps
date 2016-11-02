@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private double billAmount = 0.0;
     private double percent = 0.15;
-    private int divider = 1;
+    private int divider = 3;
     private TextView amountTextView;
     private TextView percentTextView;
     private TextView tipTextView;
@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         tipTextView = (TextView) findViewById(R.id.tipTextView);
         totalTextView = (TextView) findViewById(R.id.totalTextView);
         splitTextView = (TextView) findViewById(R.id.splitTextView);
+
+        splitTextView.setText(getString(R.string.split_def));
 
         EditText amountEditText = (EditText) findViewById(R.id.amountEditText);
         amountEditText.addTextChangedListener(new TextWatcher() {
@@ -76,7 +78,10 @@ public class MainActivity extends AppCompatActivity {
         SeekBar splitSeekBar = (SeekBar) findViewById(R.id.splitSeekBar);
         splitSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {}
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                divider = progress + 1;
+                calculate();
+            }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
@@ -91,11 +96,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         double tip = billAmount * percent;
-        double total = billAmount + tip;
+        double total = (billAmount + tip) / divider;
 
         tipTextView.setText(currencyFormat.format(tip));
         totalTextView.setText(currencyFormat.format(total));
-        //splitTextView.setText();
+        splitTextView.setText(getString(R.string.split, divider));
 
     }
 }

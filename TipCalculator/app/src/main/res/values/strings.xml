@@ -4,5 +4,6 @@
     <string name="tip_percentage">15%</string>
     <string name="tip">Tip</string>
     <string name="total">Total</string>
-    <string name="split_def">Split by: %d</string>
+    <string name="split_def">Split by: 3</string>
+    <string name="split">Split by: %d</string>
 </resources>
